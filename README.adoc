@@ -1,18 +1,18 @@
-= cui-java-module-template
+= portal-vault-sample
 
 == Status
 
-image:https://github.com/cuioss/cui-java-module-template/actions/workflows/maven.yml/badge.svg[Java CI with Maven,link=https://github.com/cuioss/cui-java-module-template/actions/workflows/maven.yml]
+image:https://github.com/cuioss/portal-vault-sample/actions/workflows/maven.yml/badge.svg[Java CI with Maven,link=https://github.com/cuioss/portal-vault-sample/actions/workflows/maven.yml]
 image:http://img.shields.io/:license-apache-blue.svg[License,link=http://www.apache.org/licenses/LICENSE-2.0.html]
-image:https://maven-badges.herokuapp.com/maven-central/de.cuioss/cui-java-module-template/badge.svg[Maven Central,link=https://maven-badges.herokuapp.com/maven-central/de.cuioss/cui-java-module-template]
+image:https://maven-badges.herokuapp.com/maven-central/de.cuioss.portal.vault/portal-vault-sample/badge.svg[Maven Central,link=https://maven-badges.herokuapp.com/maven-central/de.cuioss.portal.vault/portal-vault-sample]
 
-https://sonarcloud.io/summary/new_code?id=cuioss_cui-java-module-template[image:https://sonarcloud.io/api/project_badges/measure?project=cuioss_cui-java-module-template&metric=alert_status[Quality
+https://sonarcloud.io/summary/new_code?id=cuioss_portal-vault-sample[image:https://sonarcloud.io/api/project_badges/measure?project=cuioss_portal-vault-sample&metric=alert_status[Quality
 Gate Status]]
-image:https://sonarcloud.io/api/project_badges/measure?project=cuioss_cui-java-module-template&metric=ncloc[Lines of Code,link=https://sonarcloud.io/summary/new_code?id=cuioss_cui-java-module-template]
-image:https://sonarcloud.io/api/project_badges/measure?project=cuioss_cui-java-module-template&metric=coverage[Coverage,link=https://sonarcloud.io/summary/new_code?id=cuioss_cui-java-module-template]
+image:https://sonarcloud.io/api/project_badges/measure?project=cuioss_portal-vault-sample&metric=ncloc[Lines of Code,link=https://sonarcloud.io/summary/new_code?id=cuioss_portal-vault-sample]
+image:https://sonarcloud.io/api/project_badges/measure?project=cuioss_portal-vault-sample&metric=coverage[Coverage,link=https://sonarcloud.io/summary/new_code?id=cuioss_portal-vault-sample]
 
 
-https://cuioss.github.io/cui-java-module-template/about.html[Generated Documentation on github-pages]
+https://cuioss.github.io/portal-vault-sample/about.html[Generated Documentation on github-pages]
 
 == What is it?
 
@@ -26,41 +26,12 @@ It is meant to be used as copy-paste-template.
 [source,xml]
 ----
     <dependency>
-        <groupId>de.cuioss</groupId>
-        <artifactId>cui-java-module-template</artifactId>
+        <groupId>de.cuioss.portal.vault</groupId>
+        <artifactId>portal-vault</artifactId>
     </dependency>
 ----
 
-== Customization
 
-=== Names / Keys
-
-Create a new Repository by clicking "Use this template"
-Replace all  of `cui-java-module-template` with the new project 'key' / name, e.g. `my-java-module`. Relevant Files are:
-
-[CAUTION]
-====
-The key must *not* contain spaces. They are used for creating urls as well.
-
-====
-
-
-* `README.adoc` -> the badges on top
-* `pom.xml`
-* `SECURITY.adoc`
-* `.github/project.yml`
-* `src/site/site.xml`
-* `src/site/asciidoc/about.adoc`
-
-=== Credentials
-
-Add the necessary credentials to the project: "Settings" -> "Secrets" -> "Actions", as there are: 
-
-* `GPG_PASSPHRASE` -> Code Signing
-* `GPG_PRIVATE_KEY` -> Code Signing
-* `OSS_SONATYPE_PASSWORD` -> Deploy to maven-central 
-* `OSS_SONATYPE_USERNAME` -> Deploy to maven-central
-* `PAGES_DEPLOY_TOKEN` -> Deploying the result of maven site to https://cuioss.github.io
 * `SONAR_TOKEN` -> Sonar-Cloud
 
 They are picked up in the predefined pipeline-configurations:
