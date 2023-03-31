@@ -27,25 +27,3 @@ Portal-based UI-Client for hashicorps vault
         <artifactId>portal-vault-sample</artifactId>
     </dependency>
 ----
-
-
-* `SONAR_TOKEN` -> Sonar-Cloud
-
-They are picked up in the predefined pipeline-configurations:
-
-* `.github/workflows/maven.yml`
-* `.github/workflows/maven-release.yml`
-
-Ensure that the actions are authorized correctly: Settings > Actions > General > Workflow permissions >  "Read and write permissions" must be selected *not* "Read repository contents permission"
-
-Documentation on how to create a signing key can be found https://github.com/cuioss/cui-parent-pom/blob/master/doc/signing_key.adoc[Documentation at cui-parent-pom] 
-
-A sonar token can be derived from https://sonarcloud.io/account/security
-
-=== Further Steps
-
-* `pom.xml`: Adjust `name` and `description` elements
-* `src/site/asciidoc/about.adoc`: Adjust content
-* Review / Enable the elements under 'Security' Tab
-* Review / Add Collaborators
-* Add (link) the resulting maven-documentation: https://github.com/cuioss/cuioss.github.io/edit/main/README.md[github.io-documentation] 
