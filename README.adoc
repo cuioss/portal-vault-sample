@@ -16,10 +16,7 @@ https://cuioss.github.io/portal-vault-sample/about.html[Generated Documentation 
 
 == What is it?
 
-This is a template repository for creating java-modules for cui-open-source-projects. This incorporates all necessary java-structures, including `pom.xml`, sensible project-documentation, 
-an predefined github pipelines. 
-
-It is meant to be used as copy-paste-template.
+Portal-based UI-Client for hashicorps vault
 
 === Maven Coordinates
 
@@ -27,7 +24,7 @@ It is meant to be used as copy-paste-template.
 ----
     <dependency>
         <groupId>de.cuioss.portal.vault</groupId>
-        <artifactId>portal-vault</artifactId>
+        <artifactId>portal-vault-sample</artifactId>
     </dependency>
 ----
 
