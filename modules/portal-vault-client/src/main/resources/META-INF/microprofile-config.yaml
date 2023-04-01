@@ -1,0 +1,17 @@
+###############################
+# This file contains the default configuration the vault-client
+###############################
+integration.vault:
+  # Indicates whether the service is enabled at all, defaults to false
+  enabled: false
+  endpoint:
+    # The default name for the key-value endpoint
+    key_value: secret
+  connection:
+    type: REST
+    id: vault-client
+    description: "Defines the connection to a vault-server instance"
+    url: "http://127.0.0.1:8200"
+    authentication.token.application:
+      key: "X-Vault-Token"
+      token: Configure
