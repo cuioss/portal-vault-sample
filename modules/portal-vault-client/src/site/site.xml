@@ -17,7 +17,7 @@
     <body>
         <links>
             <item name="Home"
-                href="https://github.com/cuioss/cui-portal-core" />
+                href="https://github.com/cuioss/portal-vault-sample" />
         </links>
         <menu name="Overview">
         <item name="About" href="about.html"></item>
