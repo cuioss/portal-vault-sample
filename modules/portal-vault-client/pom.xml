@@ -11,6 +11,8 @@
     <name>Portal Vault Client</name>
     <description>Portal client to access vault-server</description>
     <properties>
+        <maven.jar.plugin.automatic.module.name>
+            de.cuioss.portal.vault.client</maven.jar.plugin.automatic.module.name>
         <vault.java.driver.version>5.1.0</vault.java.driver.version>
     </properties>
     <dependencyManagement>
@@ -30,6 +32,10 @@
         <dependency>
             <groupId>de.cuioss.portal.configuration</groupId>
             <artifactId>portal-configuration-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.inject</groupId>
+            <artifactId>jakarta.inject-api</artifactId>
         </dependency>
         <dependency>
             <groupId>de.cuioss.portal.authentication</groupId>

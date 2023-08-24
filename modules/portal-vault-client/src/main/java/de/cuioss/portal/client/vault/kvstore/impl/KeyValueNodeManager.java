@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 the original author or authors.
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * https://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package de.cuioss.portal.client.vault.kvstore.impl;
 
 import static de.cuioss.portal.client.vault.kvstore.impl.ResultFactory.notFound;
@@ -57,8 +72,8 @@ public class KeyValueNodeManager implements NodeManager {
     private static final String SERVICE_NAME = "KeyValueNodeManager";
     private static final CuiLogger log = new CuiLogger(KeyValueNodeManager.class);
 
-    private static final List<Integer> WRITE_OK =
-        immutableList(HttpServletResponse.SC_CREATED, HttpServletResponse.SC_OK);
+    private static final List<Integer> WRITE_OK = immutableList(HttpServletResponse.SC_CREATED,
+            HttpServletResponse.SC_OK);
 
     @NonNull
     @Getter
@@ -78,9 +93,8 @@ public class KeyValueNodeManager implements NodeManager {
             var meta = extractMetadata(response.getRestResponse());
             var builder = new CollectionBuilder<KVEntry>();
             for (Entry<String, String> entry : response.getData().entrySet()) {
-                builder.add(
-                        KVEntry.builder().key(entry.getKey()).value(decodePayload(entry.getValue())).metadata(meta)
-                                .build());
+                builder.add(KVEntry.builder().key(entry.getKey()).value(decodePayload(entry.getValue())).metadata(meta)
+                        .build());
             }
             return valid(builder.toImmutableList());
         } catch (VaultException e) {
@@ -90,12 +104,12 @@ public class KeyValueNodeManager implements NodeManager {
 
     Metadata extractMetadata(RestResponse response) {
         var dataOptional = VaultJsonHelper.getAsJsonObject(response, "data");
-        if (!dataOptional.isPresent()) {
+        if (dataOptional.isEmpty()) {
             log.debug("No data-object given to extract from");
             return Metadata.EMPTY;
         }
         var metaObjectOption = VaultJsonHelper.getAsJsonObject(dataOptional.get(), "metadata");
-        if (!metaObjectOption.isPresent()) {
+        if (metaObjectOption.isEmpty()) {
             log.debug("No metadata given to extract from");
             return Metadata.EMPTY;
         }
@@ -107,11 +121,10 @@ public class KeyValueNodeManager implements NodeManager {
         var builder = Metadata.builder();
         if (!MoreStrings.isEmpty(creationTime)) {
             try {
-                builder.created(ZonedDateTime.parse(creationTime)
-                        .truncatedTo(ChronoUnit.SECONDS)
-                        .toLocalDateTime());
+                builder.created(ZonedDateTime.parse(creationTime).truncatedTo(ChronoUnit.SECONDS).toLocalDateTime());
             } catch (DateTimeParseException e) {
-                log.warn(e, "Unable to determine Creation date from {}, derived by key 'created_time'", dataOptional.get());
+                log.warn(e, "Unable to determine Creation date from {}, derived by key 'created_time'",
+                        dataOptional.get());
                 builder.created(LocalDateTime.now());
             }
         } else {
@@ -119,11 +132,10 @@ public class KeyValueNodeManager implements NodeManager {
         }
         if (!MoreStrings.isEmpty(deletionTime)) {
             try {
-                builder.deleted(ZonedDateTime.parse(deletionTime)
-                        .truncatedTo(ChronoUnit.SECONDS)
-                        .toLocalDateTime());
+                builder.deleted(ZonedDateTime.parse(deletionTime).truncatedTo(ChronoUnit.SECONDS).toLocalDateTime());
             } catch (DateTimeParseException e) {
-                log.warn(e, "Unable to determine deletion date from {}, derived by key 'deletion_time'", dataOptional.get());
+                log.warn(e, "Unable to determine deletion date from {}, derived by key 'deletion_time'",
+                        dataOptional.get());
             }
         }
         return builder.destroyed(destroyed).version(version).path(navigator.getFullPath()).build();
@@ -136,11 +148,10 @@ public class KeyValueNodeManager implements NodeManager {
 
         var written = write(immutableList(entry));
         if (!written.isValid()) {
-            return ResultObject.<KVEntry> builder().extractStateAndDetailsAndErrorCodeFrom(written)
+            return ResultObject.<KVEntry>builder().extractStateAndDetailsAndErrorCodeFrom(written)
                     .validDefaultResult(KVEntry.EMPTY).build();
         }
-        var readAgain =
-            written.getResult().stream().filter(read -> entry.getKey().equals(read.getKey())).findFirst();
+        var readAgain = written.getResult().stream().filter(read -> entry.getKey().equals(read.getKey())).findFirst();
 
         if (readAgain.isPresent()) {
             return valid(readAgain.get());
@@ -159,7 +170,8 @@ public class KeyValueNodeManager implements NodeManager {
         }
         Map<String, Object> parameter = new HashMap<>();
         entries.forEach(entry -> parameter.put(entry.getKey(), parse(entry)));
-        // Now fetch existing entries: the write method acts as overwrite and not as append for the
+        // Now fetch existing entries: the write method acts as overwrite and not as
+        // append for the
         // complete path
         var existing = read();
         if (existing.isValid() && !existing.getResult().isEmpty()) {
@@ -180,7 +192,7 @@ public class KeyValueNodeManager implements NodeManager {
         var builder = new CollectionBuilder<KVEntry>();
         var allentries = read();
         if (!allentries.isValid()) {
-            return ResultObject.<Collection<KVEntry>> builder().extractStateAndDetailsAndErrorCodeFrom(allentries)
+            return ResultObject.<Collection<KVEntry>>builder().extractStateAndDetailsAndErrorCodeFrom(allentries)
                     .validDefaultResult(Collections.emptyList()).build();
         }
         log.debug("Read all entries on '{}' with entries '{}'", navigator.getFullPath(), entries);
@@ -195,9 +207,8 @@ public class KeyValueNodeManager implements NodeManager {
         if (null == value) {
             return null;
         }
-        if (value instanceof byte[]) {
+        if (value instanceof byte[] valueArray) {
             log.debug("Found byte[] as payload");
-            var valueArray = (byte[]) value;
             if (0 == valueArray.length) {
                 return null;
             }
@@ -222,11 +233,10 @@ public class KeyValueNodeManager implements NodeManager {
         requireNotEmpty(key);
         var allentries = read();
         if (!allentries.isValid()) {
-            return ResultObject.<KVEntry> builder().extractStateAndDetailsAndErrorCodeFrom(allentries)
+            return ResultObject.<KVEntry>builder().extractStateAndDetailsAndErrorCodeFrom(allentries)
                     .validDefaultResult(KVEntry.EMPTY).build();
         }
-        var found =
-            allentries.getResult().stream().filter(entry -> key.equals(entry.getKey())).findFirst();
+        var found = allentries.getResult().stream().filter(entry -> key.equals(entry.getKey())).findFirst();
         if (found.isPresent()) {
             return valid(found.get());
         }
@@ -238,7 +248,7 @@ public class KeyValueNodeManager implements NodeManager {
         log.debug("Calling delete() on '{}' with key '{}'", navigator.getFullPath(), key);
         var read = read();
         if (!read.isValid()) {
-            return ResultObject.<Boolean> builder().extractStateAndDetailsAndErrorCodeFrom(read)
+            return ResultObject.<Boolean>builder().extractStateAndDetailsAndErrorCodeFrom(read)
                     .validDefaultResult(Boolean.FALSE).build();
         }
         Map<String, Object> parameter = new HashMap<>();

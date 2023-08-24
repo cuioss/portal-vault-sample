@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 the original author or authors.
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * https://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package de.cuioss.portal.client.vault.kvstore;
 
 import java.util.List;
@@ -6,9 +21,10 @@ import de.cuioss.uimodel.result.ResultObject;
 import de.cuioss.uimodel.service.OptionalService;
 
 /**
- * Navigate through a number of paths / nodes. Paths at this level are relative to the actual mount
- * point, e.g. "https://127.0.0.1:8200/v1/secret/platform/namespaces" will result in Navigator local
- * path "/platform/namespaces"
+ * Navigate through a number of paths / nodes. Paths at this level are relative
+ * to the actual mount point, e.g.
+ * "https://127.0.0.1:8200/v1/secret/platform/namespaces" will result in
+ * Navigator local path "/platform/namespaces"
  *
  * @author Oliver Wolff
  *
@@ -16,37 +32,39 @@ import de.cuioss.uimodel.service.OptionalService;
 public interface Navigator extends OptionalService {
 
     /**
-     * @return the path of the actual Navigator instance. In case of being the root path it returns
-     *         "/"
+     * @return the path of the actual Navigator instance. In case of being the root
+     *         path it returns "/"
      */
     String getPath();
 
     /**
-     * @return the context-path of the actual Navigator instance. In case of the being the root-node
-     *         it returns '/'. In case of e.g. "/platform/namespaces" it returns "namespaces"
+     * @return the context-path of the actual Navigator instance. In case of the
+     *         being the root-node it returns '/'. In case of e.g.
+     *         "/platform/namespaces" it returns "namespaces"
      */
     String getContext();
 
     /**
-     * @return the direct parent element of the current Node, in case of being the root node the
-     *         node itself will be returned
+     * @return the direct parent element of the current Node, in case of being the
+     *         root node the node itself will be returned
      */
     Navigator getParent();
 
     /**
      * @return a list of {@link Navigator} that are direct children of the current
-     *         {@link Navigator}. An empty List is a valid result for the case it does not provide
-     *         any children
+     *         {@link Navigator}. An empty List is a valid result for the case it
+     *         does not provide any children
      */
     ResultObject<List<Navigator>> list();
 
     /**
-     * @param path identifying the path to be navigated to. They are interpreted as absolute in the
-     *            context, saying if you are within "/platform/namespaces" "/platform" will result
-     *            in "/platform" not in "/platform/namespaces/platform"
+     * @param path identifying the path to be navigated to. They are interpreted as
+     *             absolute in the context, saying if you are within
+     *             "/platform/namespaces" "/platform" will result in "/platform" not
+     *             in "/platform/namespaces/platform"
      * @return a list of {@link Navigator} that are direct children of the current
-     *         {@link Navigator}. An empty List is a valid result for the case it does not provide
-     *         any children
+     *         {@link Navigator}. An empty List is a valid result for the case it
+     *         does not provide any children
      */
     ResultObject<List<Navigator>> list(String path);
 

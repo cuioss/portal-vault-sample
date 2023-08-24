@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>de.cuioss</groupId>
@@ -17,7 +19,8 @@
     <scm>
         <url>https://github.com/cuioss/portal-vault-sample/</url>
         <connection>scm:git:https://github.com/cuioss/portal-vault-sample.git</connection>
-        <developerConnection>scm:git:https://github.com/cuioss/portal-vault-sample/</developerConnection>
+        <developerConnection>
+            scm:git:https://github.com/cuioss/portal-vault-sample/</developerConnection>
         <tag>HEAD</tag>
     </scm>
     <issueManagement>
@@ -27,7 +30,6 @@
     <properties>
         <version.cui.parent>0.4.1</version.cui.parent>
         <version.portal.core.bom>1.0.0-SNAPSHOT</version.portal.core.bom>
-        <version.okhttp3>5.0.0-alpha.11</version.okhttp3>
     </properties>
     <modules>
         <module>modules</module>

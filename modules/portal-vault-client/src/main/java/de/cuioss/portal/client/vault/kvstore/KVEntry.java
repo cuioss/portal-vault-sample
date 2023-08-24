@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 the original author or authors.
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * https://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package de.cuioss.portal.client.vault.kvstore;
 
 import java.io.ByteArrayInputStream;
@@ -110,17 +125,18 @@ public class KVEntry implements Serializable {
     }
 
     /**
-     * @return a {@link InputStream} representation of the contained value if available.
+     * @return a {@link InputStream} representation of the contained value if
+     *         available.
      */
     public Optional<InputStream> getValueAsInputStream() {
         if (null == value) {
             return Optional.empty();
         }
-        if (value instanceof String) {
-            return Optional.of(IOStreams.toInputStream((String) value));
+        if (value instanceof String string) {
+            return Optional.of(IOStreams.toInputStream(string));
         }
-        if (value instanceof byte[]) {
-            return Optional.of(new ByteArrayInputStream((byte[]) value));
+        if (value instanceof byte[] bytes) {
+            return Optional.of(new ByteArrayInputStream(bytes));
         }
         log.error("Unknown type detected key='{}', type='{}'", key, value.getClass());
         return Optional.empty();
@@ -130,8 +146,8 @@ public class KVEntry implements Serializable {
      * Shorthand for creating a new instance
      *
      * @param newValue
-     * @return a new instance of this {@link KVEntry} with the given value but containing the
-     *         previous metadata
+     * @return a new instance of this {@link KVEntry} with the given value but
+     *         containing the previous metadata
      */
     public KVEntry newValue(Serializable newValue) {
         return builder().key(key).metadata(metadata).value(newValue).build();
@@ -141,8 +157,8 @@ public class KVEntry implements Serializable {
      * Shorthand for creating a new instance
      *
      * @param newValue
-     * @return a new instance of this {@link KVEntry} with the given value but containing the
-     *         previous metadata
+     * @return a new instance of this {@link KVEntry} with the given value but
+     *         containing the previous metadata
      * @throws IOException if an I/O error occurs
      */
     public KVEntry newValue(InputStream newValue) throws IOException {
@@ -150,10 +166,10 @@ public class KVEntry implements Serializable {
     }
 
     /**
-     * Shorthand for creating a key-value filled {@link KVEntry} with implicitly passed
-     * {@link Metadata#EMPTY}
+     * Shorthand for creating a key-value filled {@link KVEntry} with implicitly
+     * passed {@link Metadata#EMPTY}
      *
-     * @param key must not be null
+     * @param key   must not be null
      * @param value may be null
      * @return the create {@link KVEntry}
      */
@@ -162,10 +178,10 @@ public class KVEntry implements Serializable {
     }
 
     /**
-     * Shorthand for creating a key-value filled {@link KVEntry} with implicitly passed
-     * {@link Metadata#EMPTY}
+     * Shorthand for creating a key-value filled {@link KVEntry} with implicitly
+     * passed {@link Metadata#EMPTY}
      *
-     * @param key must not be null
+     * @param key   must not be null
      * @param input may be null
      * @return the create {@link KVEntry}
      * @throws IOException if an I/O error occurs
@@ -175,14 +191,14 @@ public class KVEntry implements Serializable {
     }
 
     /**
-     * Shorthand for creating a key-value filled {@link KVEntry} with implicitly passed
-     * {@link Metadata#EMPTY}
+     * Shorthand for creating a key-value filled {@link KVEntry} with implicitly
+     * passed {@link Metadata#EMPTY}
      *
-     * @param key must not be null
+     * @param key    must not be null
      * @param loader may be null
      * @return the create {@link KVEntry}
-     * @throws IOException if an I/O error occurs of {@link FileLoader#isReadable()} returning
-     *             {@code false}
+     * @throws IOException if an I/O error occurs of {@link FileLoader#isReadable()}
+     *                     returning {@code false}
      */
     public static KVEntry of(String key, FileLoader loader) throws IOException {
         if (null == loader) {
@@ -196,10 +212,11 @@ public class KVEntry implements Serializable {
     }
 
     /**
-     * Translates an {@link InputStream} to an {@link Byte} array in order to serialize
+     * Translates an {@link InputStream} to an {@link Byte} array in order to
+     * serialize
      *
-     * @param input containing the content. if it null or not available {@code null} will be
-     *            returned
+     * @param input containing the content. if it null or not available {@code null}
+     *              will be returned
      * @return the content of the stream read into byte-array. may be null
      * @throws IOException
      */

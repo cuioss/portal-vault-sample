@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 the original author or authors.
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * https://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package de.cuioss.portal.client.vault.kvstore.impl;
 
 import static de.cuioss.portal.client.vault.kvstore.impl.ResultFactory.notFound;
@@ -45,11 +60,10 @@ public class KeyValueNavigator implements Navigator {
 
     private static final CuiLogger log = new CuiLogger(KeyValueNavigator.class);
 
-    private static final List<Integer> CREATE_OK =
-        immutableList(HttpServletResponse.SC_CREATED, HttpServletResponse.SC_OK);
+    private static final List<Integer> CREATE_OK = immutableList(HttpServletResponse.SC_CREATED,
+            HttpServletResponse.SC_OK);
 
-    private static final List<Integer> DELETE_OK =
-        immutableList(HttpServletResponse.SC_NO_CONTENT);
+    private static final List<Integer> DELETE_OK = immutableList(HttpServletResponse.SC_NO_CONTENT);
 
     @Getter(AccessLevel.PROTECTED)
     private final VaultContext vault;
@@ -68,7 +82,7 @@ public class KeyValueNavigator implements Navigator {
 
     /**
      * @param vault must not be null
-     * @param path must start with "/"
+     * @param path  must start with "/"
      */
     public KeyValueNavigator(VaultContext vault, String path) {
         this.vault = requireNonNull(vault);
@@ -129,10 +143,9 @@ public class KeyValueNavigator implements Navigator {
                 return notFound(Collections.emptyList(), path, SERVICE_NAME);
             }
             var parentSlashed = UrlHelper.addTrailingSlashToUrl(getPath());
-            List<Navigator> navigator =
-                list.getListData().stream()
-                        .map(pathElement -> new KeyValueNavigator(vault, parentSlashed + pathElement))
-                        .collect(Collectors.toList());
+            List<Navigator> navigator = list.getListData().stream()
+                    .map(pathElement -> new KeyValueNavigator(vault, parentSlashed + pathElement))
+                    .collect(Collectors.toList());
             return valid(navigator);
         } catch (VaultException e) {
             return vaultException(Collections.emptyList(), e);
@@ -196,7 +209,8 @@ public class KeyValueNavigator implements Navigator {
      * Checks whether a given path actually exists on the remote server
      *
      * @param path to be checked
-     * @return boolean indicating whether the actual path exists on the remote server.
+     * @return boolean indicating whether the actual path exists on the remote
+     *         server.
      */
     boolean pathExists(String path) {
         var listFromParent = getParent().list();
@@ -205,8 +219,8 @@ public class KeyValueNavigator implements Navigator {
             return false;
         }
         var searchPath = UrlHelper.removePrecedingSlashFromPath(path);
-        List<String> contextNames =
-            listFromParent.getResult().stream().map(Navigator::getContext).collect(Collectors.toList());
+        List<String> contextNames = listFromParent.getResult().stream().map(Navigator::getContext)
+                .collect(Collectors.toList());
         return contextNames.contains(searchPath);
     }
 

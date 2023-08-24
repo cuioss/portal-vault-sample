@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 the original author or authors.
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * https://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package de.cuioss.portal.client.vault.util;
 
 import java.util.Optional;
@@ -23,7 +38,8 @@ public class VaultJsonHelper {
     private static final CuiLogger log = new CuiLogger(VaultJsonHelper.class);
 
     /**
-     * @param response may be null. The actual {@link RestResponse} to be extracted from
+     * @param response may be null. The actual {@link RestResponse} to be extracted
+     *                 from
      * @return an {@link JsonValue} representation of the body-content if available
      */
     public static Optional<JsonValue> fromResponse(RestResponse response) {
@@ -36,7 +52,8 @@ public class VaultJsonHelper {
 
     /**
      * @param jsonValue
-     * @return an {@link JsonObject} representation of the given {@link JsonValue} if available
+     * @return an {@link JsonObject} representation of the given {@link JsonValue}
+     *         if available
      */
     public static Optional<JsonObject> fromJsonValue(JsonValue jsonValue) {
         if (null == jsonValue || !jsonValue.isObject()) {
@@ -47,11 +64,11 @@ public class VaultJsonHelper {
     }
 
     /**
-     * @param parent identifying the container to be searched.
-     * @param elementName identifying the child element to be looked up. If it is null or empty the
-     *            parent element will be returned
-     * @return The {@link JsonValue} representation of the the contained object identified by the
-     *         given elementName if available
+     * @param parent      identifying the container to be searched.
+     * @param elementName identifying the child element to be looked up. If it is
+     *                    null or empty the parent element will be returned
+     * @return The {@link JsonValue} representation of the the contained object
+     *         identified by the given elementName if available
      */
     public static Optional<JsonValue> getAsJsonValue(JsonObject parent, String elementName) {
         if (null == parent) {
@@ -64,26 +81,26 @@ public class VaultJsonHelper {
     }
 
     /**
-     * @param response The actual {@link RestResponse} to be extracted from
-     * @param elementName identifying the child element to be looked up. If it is null or empty the
-     *            parent element will be returned
-     * @return The {@link JsonValue} representation of the the contained object identified by the
-     *         given elementName if available
+     * @param response    The actual {@link RestResponse} to be extracted from
+     * @param elementName identifying the child element to be looked up. If it is
+     *                    null or empty the parent element will be returned
+     * @return The {@link JsonValue} representation of the the contained object
+     *         identified by the given elementName if available
      */
     public static Optional<JsonValue> getAsJsonValue(RestResponse response, String elementName) {
         var element = fromJsonValue(fromResponse(response).orElse(null));
-        if (!element.isPresent()) {
+        if (element.isEmpty()) {
             return Optional.empty();
         }
         return getAsJsonValue(element.get(), elementName);
     }
 
     /**
-     * @param response The actual {@link RestResponse} to be extracted from
-     * @param elementName identifying the child element to be looked up. If it is null or empty the
-     *            parent element will be returned
-     * @return The {@link JsonValue} representation of the the contained object identified by the
-     *         given elementName if available
+     * @param response    The actual {@link RestResponse} to be extracted from
+     * @param elementName identifying the child element to be looked up. If it is
+     *                    null or empty the parent element will be returned
+     * @return The {@link JsonValue} representation of the the contained object
+     *         identified by the given elementName if available
      */
     public static Optional<String> getAsStringValue(RestResponse response, String elementName) {
         var element = getAsJsonValue(response, elementName);
@@ -94,22 +111,22 @@ public class VaultJsonHelper {
     }
 
     /**
-     * @param response The actual {@link RestResponse} to be extracted from
-     * @param elementName identifying the child element to be looked up. If it is null or empty the
-     *            parent element will be returned
-     * @return The {@link JsonValue} representation of the the contained object identified by the
-     *         given elementName if available
+     * @param response    The actual {@link RestResponse} to be extracted from
+     * @param elementName identifying the child element to be looked up. If it is
+     *                    null or empty the parent element will be returned
+     * @return The {@link JsonValue} representation of the the contained object
+     *         identified by the given elementName if available
      */
     public static Optional<JsonObject> getAsJsonObject(RestResponse response, String elementName) {
         return fromJsonValue(getAsJsonValue(response, elementName).orElse(null));
     }
 
     /**
-     * @param parent identifying the container to be searched.
-     * @param elementName identifying the child element to be looked up. If it is null or empty the
-     *            parent element will be returned
-     * @return The {@link JsonObject} representation of the the contained object identified by the
-     *         given elementName if available
+     * @param parent      identifying the container to be searched.
+     * @param elementName identifying the child element to be looked up. If it is
+     *                    null or empty the parent element will be returned
+     * @return The {@link JsonObject} representation of the the contained object
+     *         identified by the given elementName if available
      */
     public static Optional<JsonObject> getAsJsonObject(JsonObject parent, String elementName) {
         return fromJsonValue(getAsJsonValue(parent, elementName).orElse(null));
