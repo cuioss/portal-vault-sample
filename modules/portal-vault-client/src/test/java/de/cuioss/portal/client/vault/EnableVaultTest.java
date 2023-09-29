@@ -15,8 +15,8 @@
  */
 package de.cuioss.portal.client.vault;
 
-import static de.cuioss.portal.configuration.VaultClientConfigKeys.VAULT_CLIENT_ENABLED;
-import static de.cuioss.portal.configuration.VaultClientConfigKeys.VAULT_CONNECTION_BASE;
+import static de.cuioss.portal.client.vault.VaultClientConfigKeys.VAULT_CLIENT_ENABLED;
+import static de.cuioss.portal.client.vault.VaultClientConfigKeys.VAULT_CONNECTION_BASE;
 import static de.cuioss.portal.configuration.connections.impl.ConnectionMetadataKeys.AUTH_TOKEN_APPLICATION_TOKEN;
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;

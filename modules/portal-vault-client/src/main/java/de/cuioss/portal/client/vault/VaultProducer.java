@@ -15,8 +15,8 @@
  */
 package de.cuioss.portal.client.vault;
 
-import static de.cuioss.portal.configuration.VaultClientConfigKeys.VAULT_CLIENT_ENABLED;
-import static de.cuioss.portal.configuration.VaultClientConfigKeys.VAULT_ENDPOINT_KEY_VALUE;
+import static de.cuioss.portal.client.vault.VaultClientConfigKeys.VAULT_CLIENT_ENABLED;
+import static de.cuioss.portal.client.vault.VaultClientConfigKeys.VAULT_ENDPOINT_KEY_VALUE;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;
@@ -30,7 +30,6 @@ import com.bettercloud.vault.SslConfig;
 import com.bettercloud.vault.Vault;
 import com.bettercloud.vault.VaultConfig;
 
-import de.cuioss.portal.configuration.VaultClientConfigKeys;
 import de.cuioss.portal.configuration.connections.impl.ConnectionMetadata;
 import de.cuioss.portal.configuration.types.ConfigAsConnectionMetadata;
 import lombok.Getter;
