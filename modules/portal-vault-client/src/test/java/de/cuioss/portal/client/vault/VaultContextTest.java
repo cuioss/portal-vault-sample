@@ -15,15 +15,11 @@
  */
 package de.cuioss.portal.client.vault;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import javax.inject.Inject;
-import javax.inject.Provider;
-
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @EnableVaultTest
 class VaultContextTest {

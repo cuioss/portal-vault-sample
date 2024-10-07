@@ -30,8 +30,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.servlet.http.HttpServletResponse;
-
 import com.bettercloud.vault.VaultException;
 
 import de.cuioss.portal.client.vault.VaultContext;
@@ -42,6 +40,7 @@ import de.cuioss.tools.net.UrlHelper;
 import de.cuioss.tools.string.MoreStrings;
 import de.cuioss.uimodel.result.ResultObject;
 import de.cuioss.uimodel.service.ServiceState;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

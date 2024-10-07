@@ -15,26 +15,18 @@
  */
 package de.cuioss.portal.client.vault.kvstore.impl;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import javax.inject.Inject;
-import javax.inject.Provider;
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import de.cuioss.portal.client.vault.EnableVaultTest;
-import de.cuioss.portal.client.vault.EnabledIfVaultIsReachable;
-import de.cuioss.portal.client.vault.PortalVaultContext;
-import de.cuioss.portal.client.vault.VaultContext;
-import de.cuioss.portal.client.vault.VaultEndpoint;
+import de.cuioss.portal.client.vault.*;
 import de.cuioss.portal.client.vault.kvstore.Navigator;
 import de.cuioss.test.juli.junit5.EnableTestLogger;
 import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.uimodel.result.ResultErrorCodes;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @EnableVaultTest
 @EnableTestLogger(debug = KeyValueNavigatorIntegrationTest.class)

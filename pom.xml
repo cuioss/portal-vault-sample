@@ -6,7 +6,7 @@
     <parent>
         <groupId>de.cuioss</groupId>
         <artifactId>cui-java-parent</artifactId>
-        <version>0.7.3</version>
+        <version>0.8.0</version>
         <relativePath />
     </parent>
     <groupId>de.cuioss.portal.vault</groupId>
@@ -28,8 +28,8 @@
         <system>GitHub Issues</system>
     </issueManagement>
     <properties>
-        <version.cui.parent>0.6.0</version.cui.parent>
-        <version.portal.core.bom>1.0.0-SNAPSHOT</version.portal.core.bom>
+        <version.cui.parent>0.8.0</version.cui.parent>
+        <version.portal.core.bom>1.0.0</version.portal.core.bom>
         <sonar.skip>true</sonar.skip>
     </properties>
     <modules>

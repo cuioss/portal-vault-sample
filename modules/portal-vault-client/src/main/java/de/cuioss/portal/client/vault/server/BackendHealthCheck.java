@@ -15,10 +15,6 @@
  */
 package de.cuioss.portal.client.vault.server;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.inject.Provider;
-
 import com.bettercloud.vault.VaultException;
 
 import de.cuioss.portal.client.vault.PortalVaultContext;
@@ -28,6 +24,9 @@ import de.cuioss.portal.client.vault.util.VaultJsonHelper;
 import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.uimodel.service.OptionalService;
 import de.cuioss.uimodel.service.ServiceState;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 
 /**
  * @author Oliver Wolff

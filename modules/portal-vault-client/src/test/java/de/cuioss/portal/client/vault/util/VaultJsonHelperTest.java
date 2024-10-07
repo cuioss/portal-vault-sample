@@ -15,19 +15,14 @@
  */
 package de.cuioss.portal.client.vault.util;
 
-import static de.cuioss.portal.client.vault.util.VaultJsonHelper.fromResponse;
-import static de.cuioss.portal.client.vault.util.VaultJsonHelper.getAsJsonObject;
-import static de.cuioss.portal.client.vault.util.VaultJsonHelper.getAsJsonValue;
-import static de.cuioss.portal.client.vault.util.VaultJsonHelper.getAsStringValue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import javax.servlet.http.HttpServletResponse;
-
-import org.junit.jupiter.api.Test;
-
 import com.bettercloud.vault.json.JsonObject;
 import com.bettercloud.vault.rest.RestResponse;
+import jakarta.servlet.http.HttpServletResponse;
+import org.junit.jupiter.api.Test;
+
+import static de.cuioss.portal.client.vault.util.VaultJsonHelper.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class VaultJsonHelperTest {
 
@@ -36,7 +31,7 @@ class VaultJsonHelperTest {
     private static final RestResponse CONTENT_RESPONSE = new RestResponse(HttpServletResponse.SC_OK, "application/json",
             "{\"request_id\": \"75c0ebac-5412-5ac8-90f0-fa8267752c7c\"}".getBytes());
     private static final RestResponse EMPTY_RESPONSE = new RestResponse(HttpServletResponse.SC_NO_CONTENT,
-            "application/json", new byte[] {});
+            "application/json", new byte[]{});
 
     @Test
     void shouldHandleResponse() {

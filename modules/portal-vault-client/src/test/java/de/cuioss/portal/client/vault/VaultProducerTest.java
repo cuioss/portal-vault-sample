@@ -15,17 +15,15 @@
  */
 package de.cuioss.portal.client.vault;
 
+import com.bettercloud.vault.Vault;
+import com.bettercloud.vault.VaultConfig;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
+import org.junit.jupiter.api.Test;
+
 import static de.cuioss.tools.string.MoreStrings.isEmpty;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-import javax.inject.Inject;
-import javax.inject.Provider;
-
-import org.junit.jupiter.api.Test;
-
-import com.bettercloud.vault.Vault;
-import com.bettercloud.vault.VaultConfig;
 
 @EnableVaultTest
 class VaultProducerTest {

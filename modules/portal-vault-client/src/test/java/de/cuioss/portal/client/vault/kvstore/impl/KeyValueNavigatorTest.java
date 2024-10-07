@@ -15,24 +15,17 @@
  */
 package de.cuioss.portal.client.vault.kvstore.impl;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
-import javax.inject.Inject;
-import javax.inject.Provider;
-
-import org.junit.jupiter.api.Test;
-
-import de.cuioss.portal.client.vault.EnableVaultTest;
-import de.cuioss.portal.client.vault.PortalVaultContext;
-import de.cuioss.portal.client.vault.VaultClientConfigKeys;
-import de.cuioss.portal.client.vault.VaultContext;
-import de.cuioss.portal.client.vault.VaultEndpoint;
-import de.cuioss.portal.configuration.PortalConfigurationSource;
+import de.cuioss.portal.client.vault.*;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.test.juli.junit5.EnableTestLogger;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
 import de.cuioss.uimodel.service.ServiceState;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @EnableVaultTest
 @EnableTestLogger(debug = KeyValueNavigatorTest.class)
@@ -44,7 +37,6 @@ class KeyValueNavigatorTest implements ShouldBeNotNull<KeyValueNavigator> {
     static final String NESTED_PATH = FIRST_ELEMENT_PATH + "/" + SECOND_ELEMENT;
 
     @Inject
-    @PortalConfigurationSource
     private PortalTestConfiguration configuration;
 
     @Inject
@@ -77,7 +69,7 @@ class KeyValueNavigatorTest implements ShouldBeNotNull<KeyValueNavigator> {
 
     @Test
     void shouldHandleDisabled() {
-        configuration.fireEvent(VaultClientConfigKeys.VAULT_CLIENT_ENABLED, "false");
+        configuration.update(VaultClientConfigKeys.VAULT_CLIENT_ENABLED, "false");
         var underTest = getUnderTest();
         assertEquals(ServiceState.NOT_CONFIGURED, underTest.getServiceState());
         assertFalse(underTest.list().isValid());

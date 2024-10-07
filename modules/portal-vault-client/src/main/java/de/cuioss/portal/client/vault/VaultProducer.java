@@ -15,30 +15,26 @@
  */
 package de.cuioss.portal.client.vault;
 
-import static de.cuioss.portal.client.vault.VaultClientConfigKeys.VAULT_CLIENT_ENABLED;
-import static de.cuioss.portal.client.vault.VaultClientConfigKeys.VAULT_ENDPOINT_KEY_VALUE;
-
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.Dependent;
-import javax.enterprise.inject.Produces;
-import javax.inject.Inject;
-import javax.inject.Provider;
-
-import org.eclipse.microprofile.config.inject.ConfigProperty;
-
 import com.bettercloud.vault.SslConfig;
 import com.bettercloud.vault.Vault;
 import com.bettercloud.vault.VaultConfig;
-
 import de.cuioss.portal.configuration.connections.impl.ConnectionMetadata;
 import de.cuioss.portal.configuration.types.ConfigAsConnectionMetadata;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.inject.Produces;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 import lombok.Getter;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+
+import static de.cuioss.portal.client.vault.VaultClientConfigKeys.VAULT_CLIENT_ENABLED;
+import static de.cuioss.portal.client.vault.VaultClientConfigKeys.VAULT_ENDPOINT_KEY_VALUE;
 
 /**
  * Produces Instance of {@link VaultConfig}
  *
  * @author Oliver Wolff
- *
  */
 @ApplicationScoped
 class VaultProducer {
@@ -55,7 +51,7 @@ class VaultProducer {
     @Inject
     @ConfigProperty(name = VAULT_ENDPOINT_KEY_VALUE)
     @Getter
-    private Provider<String> keyVauleEndpoint;
+    private Provider<String> keyValueEndpoint;
 
     @Produces
     @Dependent
@@ -78,13 +74,13 @@ class VaultProducer {
     @Dependent
     @PortalVaultContext(VaultEndpoint.KEY_VALUE)
     VaultContext produceVaultContextKV() {
-        return VaultContext.builder().enabled(enabled.get().booleanValue()).endpointName(keyVauleEndpoint.get())
+        return VaultContext.builder().enabled(enabled.get()).endpointName(keyValueEndpoint.get())
                 .vault(produceVault()).url(metadataProducer.get().getServiceUrl()).build();
     }
 
     /**
-     * @return a {@link VaultContext} to be used in the context of Healthchecks.
-     *         Therefore the token will be overridden with the value "unauthorized"
+     * @return a {@link VaultContext} to be used in the context of Health checks.
+     * Therefore, the token will be overridden with the value "unauthorized"
      */
     @Produces
     @Dependent
@@ -92,7 +88,7 @@ class VaultProducer {
     VaultContext produceVaultContextHealth() {
         var config = produceVaultConfig();
         config.token("unauthorized");
-        return VaultContext.builder().enabled(enabled.get().booleanValue())
+        return VaultContext.builder().enabled(enabled.get())
                 .endpointName(VaultEndpoint.HEALTH.getDefaultValue()).vault(new Vault(config))
                 .url(metadataProducer.get().getServiceUrl()).build();
 

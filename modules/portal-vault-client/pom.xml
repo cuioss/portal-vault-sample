@@ -30,8 +30,8 @@
             <artifactId>vault-java-driver</artifactId>
         </dependency>
         <dependency>
-            <groupId>de.cuioss.portal.configuration</groupId>
-            <artifactId>portal-configuration-api</artifactId>
+            <groupId>de.cuioss.portal.core</groupId>
+            <artifactId>portal-configuration</artifactId>
         </dependency>
         <dependency>
             <groupId>jakarta.inject</groupId>
