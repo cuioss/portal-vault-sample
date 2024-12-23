@@ -29,7 +29,7 @@
     </issueManagement>
     <properties>
         <version.cui.parent>0.8.4</version.cui.parent>
-        <version.portal.core.bom>1.0.0</version.portal.core.bom>
+        <version.portal.core.bom>1.1.1</version.portal.core.bom>
         <sonar.skip>true</sonar.skip>
     </properties>
     <modules>
