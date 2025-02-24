@@ -28,7 +28,7 @@
         <system>GitHub Issues</system>
     </issueManagement>
     <properties>
-        <version.cui.parent>0.8.6</version.cui.parent>
+        <version.cui.parent>0.9.0</version.cui.parent>
         <version.portal.core.bom>1.0.0</version.portal.core.bom>
         <sonar.skip>true</sonar.skip>
     </properties>
